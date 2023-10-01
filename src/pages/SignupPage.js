@@ -9,7 +9,7 @@ import useResponsive from '../hooks/useResponsive';
 import Logo from '../components/logo';
 import Iconify from '../components/iconify';
 // sections
-import { LoginForm } from '../sections/auth/login';
+import { SignupForm } from '../sections/auth/login';
 
 // ----------------------------------------------------------------------
 
@@ -47,7 +47,7 @@ export default function LoginPage() {
   return (
     <>
       <Helmet>
-        <title> Login | Minimal UI </title>
+        <title> Login | Etagers </title>
       </Helmet>
 
       <StyledRoot>
@@ -71,13 +71,13 @@ export default function LoginPage() {
         <Container maxWidth="sm">
           <StyledContent>
             <Typography variant="h4" gutterBottom>
-              Sign in to Minimal
+              Sign up
             </Typography>
 
             <Typography variant="body2" sx={{ mb: 5 }}>
-              Don't have an account? {''}
-              <Link component={RouterLink} to={'/signUp'} variant="subtitle2">
-                Get started
+              Already have an account? {''}
+              <Link component={RouterLink} to={'/login'} variant="subtitle2">
+                Sign in
               </Link>
             </Typography>
 
@@ -101,7 +101,7 @@ export default function LoginPage() {
               </Typography>
             </Divider>
 
-            <LoginForm />
+            <SignupForm />
           </StyledContent>
         </Container>
       </StyledRoot>

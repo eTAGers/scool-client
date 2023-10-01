@@ -1,20 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// @mui
-import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
+import { Stack, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-// components
+import { useForm, Controller } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { Controller, useForm } from 'react-hook-form';
-import { login } from '../../../slices/auth';
 import { FormLabel, MESSAGE } from '../../../utils/message';
 import { Textfield } from '../../../utils/formLib';
-import Iconify from '../../../components/iconify';
 import { useSnackbar } from '../../../utils/CommonSnack';
+import Iconify from '../../../components/iconify';
+import { signUp } from '../../../slices/auth';
 
-// ----------------------------------------------------------------------
-
-export default function LoginForm() {
+export default function SignupForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { showSnackbar } = useSnackbar();
@@ -26,25 +22,22 @@ export default function LoginForm() {
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
+      mobile: '',
+      userName: '',
       password: '',
-      emailOrMobile: '',
+      email: '',
     },
   });
+
   const [showPassword, setShowPassword] = useState(false);
 
-  const loginApi = (data) => {
-    dispatch(login(data))
+  const signUpApi = (data) => {
+    dispatch(signUp(data))
       .unwrap()
       .then((data) => {
         if (data.status === 200) {
           showSnackbar(data.message, 'success');
-          if (data.data.storename) {
-            navigate('/dashboard');
-          } else {
-            navigate('/store');
-          }
-          console.log(data.data);
-          localStorage.setItem('userDetails', JSON.stringify(data.data));
+          navigate('/login');
         } else {
           showSnackbar(data.message, 'error');
         }
@@ -54,43 +47,70 @@ export default function LoginForm() {
         showSnackbar(e.message, 'error');
       });
   };
-  const onSubmit = (formData) => {
-    const { emailOrMobile, password } = formData;
-    const isEmail = /^\S+@\S+$/i.test(emailOrMobile);
-
-    if (isEmail || (/^[0-9]*$/.test(emailOrMobile) && emailOrMobile.length === 10)) {
-      const data = isEmail ? { email: emailOrMobile, password } : { mobile: emailOrMobile, password };
-      loginApi(data);
-    } else {
-      showSnackbar('Invalid email or mobile number', 'error');
-    }
+  const onSubmit = (data) => {
+    signUpApi(data);
   };
-  const validateEmailOrMobile = (value) => {
-    const isEmail = /^\S+@\S+$/i.test(value);
-    const isMobile = /^[0-9]*$/.test(value) && value.length === 10;
 
-    if (!isEmail && !isMobile) {
-      return 'Invalid email or mobile number';
-    }
-
-    return true;
-  };
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
         <Controller
-          name="emailOrMobile"
+          name="email"
           control={control}
           rules={{
             required: MESSAGE.required,
-            validate: validateEmailOrMobile,
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: MESSAGE.invalidEmail,
+            },
           }}
           render={({ field }) => (
             <Textfield
               {...field}
-              label={FormLabel.emailOrMobile}
-              error={Boolean(errors.emailOrMobile)}
-              helperText={errors.emailOrMobile?.message}
+              label={FormLabel.email}
+              error={Boolean(errors.email)}
+              helperText={errors.email?.message}
+              required
+            />
+          )}
+        />
+        <Controller
+          name="userName"
+          control={control}
+          rules={{ required: MESSAGE.required }}
+          render={({ field }) => (
+            <Textfield
+              {...field}
+              label={FormLabel.userName}
+              error={Boolean(errors.userName)}
+              helperText={errors.userName?.message}
+              required
+            />
+          )}
+        />
+        <Controller
+          name="mobile"
+          control={control}
+          rules={{
+            required: MESSAGE.required,
+            pattern: {
+              value: /^[0-9]*$/,
+              message: MESSAGE.invalidMobile,
+            },
+            validate: (value) => {
+              if (value.length !== 10) {
+                return 'Mobile number must be 10 digits long';
+              }
+              return true;
+            },
+          }}
+          render={({ field }) => (
+            <Textfield
+              {...field}
+              label={FormLabel.mobile}
+              error={Boolean(errors.mobile)}
+              helperText={errors.mobile?.message}
+              inputMode="numeric"
               required
             />
           )}
@@ -99,7 +119,7 @@ export default function LoginForm() {
         <Controller
           name="password"
           control={control}
-          rules={{ required: MESSAGE.required }}
+          rules={{ required: MESSAGE.required, minLength: 6 }}
           render={({ field }) => (
             <Textfield
               {...field}
@@ -122,15 +142,8 @@ export default function LoginForm() {
         />
       </Stack>
 
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
-        <Checkbox name="remember" label="Remember me" />
-        <Link variant="subtitle2" underline="hover">
-          Forgot password?
-        </Link>
-      </Stack>
-
-      <LoadingButton fullWidth size="large" type="submit" variant="contained">
-        Login
+      <LoadingButton sx={{ my: 2 }} fullWidth size="large" type="submit" variant="contained">
+        Sign up
       </LoadingButton>
     </form>
   );
