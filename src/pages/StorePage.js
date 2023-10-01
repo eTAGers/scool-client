@@ -3,12 +3,13 @@ import { Helmet } from 'react-helmet-async';
 import { styled } from '@mui/material/styles';
 import { Container, Typography } from '@mui/material';
 // hooks
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
 import useResponsive from '../hooks/useResponsive';
 // components
 import Logo from '../components/logo';
 // sections
 import { StoreForm } from '../sections/auth/login';
-
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled('div')(({ theme }) => ({
@@ -30,6 +31,11 @@ const StyledContent = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Storepage() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
   return (
     <>
       <Helmet>
@@ -44,7 +50,18 @@ export default function Storepage() {
             left: { xs: 16, sm: 24, md: 40 },
           }}
         />
-
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{
+            position: 'fixed',
+            top: { xs: 16, sm: 24, md: 40 },
+            right: { xs: 16, sm: 24, md: 40 },
+            cursor: 'pointer',
+          }}
+        >
+          <LogoutIcon onClick={handleLogout} />
+        </Typography>
         <Container maxWidth="sm">
           <StyledContent>
             <Typography variant="h4" gutterBottom>
