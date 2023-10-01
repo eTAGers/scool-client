@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
+import Loader from './components/Loader';
 import { getUserDetails } from './utils/utility';
 
 // Layouts
@@ -79,5 +80,5 @@ export default function Router() {
   }
   const routes = useRoutes(route);
 
-  return <Suspense fallback={<div>Loading...</div>}>{routes}</Suspense>;
+  return <Suspense fallback={<Loader open />}>{routes}</Suspense>;
 }

@@ -5,7 +5,6 @@ import { Container, Typography } from '@mui/material';
 // hooks
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
-import useResponsive from '../hooks/useResponsive';
 // components
 import Logo from '../components/logo';
 // sections

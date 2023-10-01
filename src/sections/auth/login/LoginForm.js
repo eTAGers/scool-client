@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // @mui
-import { Link, Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
+import { Link, Stack, IconButton, InputAdornment, Checkbox } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // components
 import { useDispatch } from 'react-redux';
@@ -36,14 +36,12 @@ export default function LoginForm() {
       .then((data) => {
         if (data.status === 200) {
           showSnackbar(data.message, 'success');
-          console.log(data);
           if (data.data.storename) {
             navigate('/dashboard');
           } else {
             window.location.reload();
             navigate('/store');
           }
-          console.log(data.data);
           localStorage.removeItem('userDetails');
           localStorage.setItem('userDetails', JSON.stringify(data.data));
         } else {

@@ -7,7 +7,7 @@ import ThemeProvider from './theme';
 // components
 import { StyledChart } from './components/chart';
 import ScrollToTop from './components/scroll-to-top';
-import { SnackbarProvider } from './utils/CommonSnack';
+import SnackbarProvider from './utils/CommonSnack';
 
 // ----------------------------------------------------------------------
 
