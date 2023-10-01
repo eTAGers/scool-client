@@ -23,7 +23,7 @@ export default function ProductsPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: Products | Minimal UI </title>
+        <title> Dashboard: Products | Etagers </title>
       </Helmet>
 
       <Container>
@@ -42,8 +42,7 @@ export default function ProductsPage() {
           </Stack>
         </Stack>
 
-        <ProductList products={PRODUCTS} />
-        <ProductCartWidget />
+        {/* <ProductList products={PRODUCTS} /> */}
       </Container>
     </>
   );

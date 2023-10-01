@@ -24,7 +24,12 @@ export const SnackbarProvider = ({ children }) => {
   return (
     <SnackbarContext.Provider value={{ showSnackbar, closeSnackbar }}>
       {children}
-      <Snackbar open={open} autoHideDuration={4000} onClose={closeSnackbar}>
+      <Snackbar
+        open={open}
+        autoHideDuration={4000}
+        onClose={closeSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
         <MuiAlert elevation={6} variant="filled" onClose={closeSnackbar} severity={severity}>
           {message}
         </MuiAlert>
