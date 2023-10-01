@@ -8,6 +8,7 @@ import { FormLabel, MESSAGE } from '../../../utils/message';
 import { Textfield } from '../../../utils/formLib';
 import { useSnackbar } from '../../../utils/CommonSnack';
 import { createStore } from '../../../slices/auth';
+import { getUserDetails } from '../../../utils/utility';
 
 export default function StoreForm() {
   const navigate = useNavigate();
@@ -31,8 +32,10 @@ export default function StoreForm() {
       .unwrap()
       .then((data) => {
         if (data.status === 200) {
+          const local = { ...getUserDetails(), ...data.data.resp[0] };
+          localStorage.setItem('userDetails', JSON.stringify(local));
           showSnackbar(data.message, 'success');
-          navigate('/dashboard');
+          navigate('/dashboard/app');
         } else {
           showSnackbar(data.message, 'error');
         }

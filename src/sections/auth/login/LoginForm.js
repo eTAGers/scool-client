@@ -38,6 +38,7 @@ export default function LoginForm() {
       .then((data) => {
         if (data.status === 200) {
           showSnackbar(data.message, 'success');
+          console.log(data);
           if (data.data.storename) {
             navigate('/dashboard');
           } else {

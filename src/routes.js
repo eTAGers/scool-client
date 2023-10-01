@@ -18,8 +18,9 @@ import { getUserDetails } from './utils/utility';
 export default function Router() {
   const isloggedIn = 'userDetails' in localStorage ? JSON.parse(localStorage.getItem('userDetails')).token : '';
   let route = [];
+  console.log(getUserDetails()?.storename);
   if (isloggedIn) {
-    if (getUserDetails().storeName) {
+    if (getUserDetails()?.storename) {
       route = [
         {
           path: '/dashboard',
