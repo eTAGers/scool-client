@@ -11,14 +11,12 @@ import { FormLabel, MESSAGE } from '../../../utils/message';
 import { Textfield } from '../../../utils/formLib';
 import Iconify from '../../../components/iconify';
 import { useSnackbar } from '../../../utils/CommonSnack';
-
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { showSnackbar } = useSnackbar();
-
   const {
     handleSubmit,
     control,
@@ -42,9 +40,11 @@ export default function LoginForm() {
           if (data.data.storename) {
             navigate('/dashboard');
           } else {
+            window.location.reload();
             navigate('/store');
           }
           console.log(data.data);
+          localStorage.removeItem('userDetails');
           localStorage.setItem('userDetails', JSON.stringify(data.data));
         } else {
           showSnackbar(data.message, 'error');

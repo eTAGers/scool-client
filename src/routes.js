@@ -1,24 +1,23 @@
+import React, { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
-// layouts
-import DashboardLayout from './layouts/dashboard';
-import SimpleLayout from './layouts/simple';
-//
-import BlogPage from './pages/BlogPage';
-import UserPage from './pages/UserPage';
-import LoginPage from './pages/LoginPage';
-import Page404 from './pages/Page404';
-import ProductsPage from './pages/ProductsPage';
-import DashboardAppPage from './pages/DashboardAppPage';
-import SignupPage from './pages/SignupPage';
-import Storepage from './pages/StorePage';
 import { getUserDetails } from './utils/utility';
 
-// ----------------------------------------------------------------------
+// Layouts
+const DashboardLayout = lazy(() => import('./layouts/dashboard'));
+
+// Pages
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const UserPage = lazy(() => import('./pages/UserPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+// const Page404 = lazy(() => import('./pages/Page404'));
+const ProductsPage = lazy(() => import('./pages/ProductsPage'));
+const DashboardAppPage = lazy(() => import('./pages/DashboardAppPage'));
+const SignupPage = lazy(() => import('./pages/SignupPage'));
+const Storepage = lazy(() => import('./pages/StorePage'));
 
 export default function Router() {
   const isloggedIn = 'userDetails' in localStorage ? JSON.parse(localStorage.getItem('userDetails')).token : '';
   let route = [];
-  console.log(getUserDetails()?.storename);
   if (isloggedIn) {
     if (getUserDetails()?.storename) {
       route = [
@@ -80,5 +79,5 @@ export default function Router() {
   }
   const routes = useRoutes(route);
 
-  return routes;
+  return <Suspense fallback={<div>Loading...</div>}>{routes}</Suspense>;
 }

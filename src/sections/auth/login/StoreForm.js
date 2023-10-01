@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Stack, IconButton, InputAdornment } from '@mui/material';
+import { Stack } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -33,6 +32,7 @@ export default function StoreForm() {
       .then((data) => {
         if (data.status === 200) {
           const local = { ...getUserDetails(), ...data.data.resp[0] };
+          localStorage.removeItem('userDetails');
           localStorage.setItem('userDetails', JSON.stringify(local));
           showSnackbar(data.message, 'success');
           navigate('/dashboard/app');
