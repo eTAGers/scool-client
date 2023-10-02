@@ -80,5 +80,5 @@ export default function Router() {
   }
   const routes = useRoutes(route);
 
-  return <Suspense fallback={<Loader open />}>{routes}</Suspense>;
+  return <Suspense fallback={<Loader open loadingMessage="Loading..." />}>{routes}</Suspense>;
 }
