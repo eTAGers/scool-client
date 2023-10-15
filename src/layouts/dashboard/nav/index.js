@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
 import { Box, Link, Drawer, Typography, Avatar } from '@mui/material';
@@ -54,8 +54,16 @@ export default function Nav({ openNav, onCloseNav }) {
         '& .simplebar-content': { height: 1, display: 'flex', flexDirection: 'column' },
       }}
     >
-      <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
-        <Logo />
+      <Box sx={{ px: 2.5, py: 3, display: 'flex', justifyContent: 'space-between' }}>
+        <Logo />{' '}
+        <Link
+          to={`https://etagers-e-com.netlify.app/${getUserDetails().storename}`}
+          component={RouterLink}
+          target="_blank"
+          sx={{ marginTop: 1, display: 'contents' }}
+        >
+          Visit store
+        </Link>
       </Box>
 
       <Box sx={{ mb: 5, mx: 2.5 }}>
