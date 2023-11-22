@@ -54,33 +54,15 @@ export default function Nav({ openNav, onCloseNav }) {
         '& .simplebar-content': { height: 1, display: 'flex', flexDirection: 'column' },
       }}
     >
-      <Box sx={{ px: 2.5, py: 3, display: 'flex', justifyContent: 'space-between' }}>
+      <Box sx={{ px: 2.5, pt: 3, display: 'flex', justifyContent: 'space-between' }}>
         <Logo />{' '}
         <Link
           to={`https://etagers-e-com.netlify.app/${getUserDetails().storename}`}
           component={RouterLink}
           target="_blank"
-          sx={{ marginTop: 1, display: 'contents' }}
+          sx={{ mt: 4, display: 'contents' }}
         >
           Visit store
-        </Link>
-      </Box>
-
-      <Box sx={{ mb: 5, mx: 2.5 }}>
-        <Link underline="none">
-          <StyledAccount>
-            <Avatar src={account.photoURL} alt="photoURL" />
-
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {getUserDetails().userName}
-              </Typography>
-
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
-              </Typography>
-            </Box>
-          </StyledAccount>
         </Link>
       </Box>
 

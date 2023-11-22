@@ -2,6 +2,9 @@ import React, { lazy, Suspense } from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 import Loader from './components/Loader';
 import { getUserDetails } from './utils/utility';
+import fieldData from './utils/pages.json';
+import DynamicPage from './pages/DynamicPage';
+import ProductAddPage from './pages/ProductAddPage';
 
 // Layouts
 const DashboardLayout = lazy(() => import('./layouts/dashboard'));
@@ -30,7 +33,12 @@ export default function Router() {
             { path: 'app', element: <DashboardAppPage /> },
             { path: 'user', element: <UserPage /> },
             { path: 'products', element: <ProductsPage /> },
+            { path: 'addProducts', element: <ProductAddPage /> },
             { path: 'blog', element: <BlogPage /> },
+            ...Object.keys(fieldData).map((sectionName) => ({
+              path: sectionName.toLowerCase(),
+              element: <DynamicPage sectionName={sectionName} />,
+            })),
           ],
         },
         {

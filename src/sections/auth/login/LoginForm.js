@@ -37,6 +37,7 @@ export default function LoginForm() {
         if (data.status === 200) {
           showSnackbar(data.message, 'success');
           if (data.data.storename) {
+            window.location.reload();
             navigate('/dashboard');
           } else {
             window.location.reload();

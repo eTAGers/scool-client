@@ -1,0 +1,17 @@
+{
+  "category": {
+    "fields": [
+      {
+        "name": "category_name",
+        "type": "text",
+        "label": "Category Name",
+        "variant": "outlined",
+        "fullWidth": true,
+        "required": true,
+        "xs": 12,
+        "sm": 4
+      }
+    ],
+    "tableName": "categories"
+  }
+}

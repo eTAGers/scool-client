@@ -1,0 +1,76 @@
+{
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "Product Name",
+      "variant": "outlined",
+      "fullWidth": true,
+      "required": true,
+      "xs": 12,
+      "sm": 4
+    },
+    {
+      "name": "categories",
+      "type": "multiselect",
+      "label": "Product Category",
+      "variant": "outlined",
+      "fullWidth": true,
+      "required": true,
+      "xs": 12,
+      "sm": 4,
+      "isOptionVariable": true,
+      "optionsVariable": "category"
+    },
+    {
+      "name": "originalPrice",
+      "type": "text",
+      "label": "Original Price",
+      "variant": "outlined",
+      "fullWidth": true,
+      "required": true,
+      "xs": 12,
+      "sm": 4
+    },
+    {
+      "name": "sellingPrice",
+      "type": "text",
+      "label": "Selling Price",
+      "variant": "outlined",
+      "fullWidth": true,
+      "required": true,
+      "xs": 12,
+      "sm": 4
+    },
+    {
+      "name": "unit",
+      "type": "text",
+      "label": "Unit",
+      "variant": "outlined",
+      "fullWidth": true,
+      "required": true,
+      "xs": 12,
+      "sm": 4
+    },
+    {
+      "name": "qty",
+      "type": "text",
+      "label": "Quantity",
+      "variant": "outlined",
+      "fullWidth": true,
+      "required": true,
+      "xs": 12,
+      "sm": 4
+    },
+    {
+      "name": "description",
+      "type": "textarea",
+      "label": "Description",
+      "variant": "outlined",
+      "fullWidth": true,
+      "required": true,
+      "xs": 12,
+      "sm": 12
+    }
+  ]
+}
