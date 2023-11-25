@@ -29,6 +29,7 @@ export default function NavSection({ data = [], ...other }) {
             }}
           />
         ))}
+        <NavItem key={Math.random()} item={{ title: 'School Settings', path: 'settings' }} />
       </List>
     </Box>
   );

@@ -1,17 +1,119 @@
 {
-  "category": {
+  "school": {
     "fields": [
       {
-        "name": "category_name",
+        "name": "name",
         "type": "text",
-        "label": "Category Name",
+        "label": "School Name",
         "variant": "outlined",
         "fullWidth": true,
         "required": true,
         "xs": 12,
-        "sm": 4
+        "sm": 3
+      },
+      {
+        "name": "initials",
+        "type": "text",
+        "label": "Initials",
+        "variant": "outlined",
+        "fullWidth": true,
+        "required": true,
+        "xs": 12,
+        "sm": 3
+      },
+      {
+        "name": "address",
+        "type": "text",
+        "label": "Address",
+        "variant": "outlined",
+        "fullWidth": true,
+        "required": true,
+        "xs": 12,
+        "sm": 3
+      },
+      {
+        "name": "email",
+        "type": "text",
+        "label": "Initials",
+        "variant": "outlined",
+        "fullWidth": true,
+        "required": true,
+        "xs": 12,
+        "sm": 3
+      },
+      {
+        "name": "phone",
+        "type": "text",
+        "label": "Initials",
+        "variant": "outlined",
+        "fullWidth": true,
+        "required": true,
+        "xs": 12,
+        "sm": 3
+      },
+      {
+        "name": "code",
+        "type": "text",
+        "label": "Initials",
+        "variant": "outlined",
+        "fullWidth": true,
+        "required": true,
+        "xs": 12,
+        "sm": 3
+      },
+      {
+        "name": "status",
+        "type": "radio",
+        "label": "Status",
+        "options": [
+          { "label": "Active", "value": true },
+          { "label": "InActive", "value": false }
+        ],
+        "variant": "outlined",
+        "fullWidth": true,
+        "required": true,
+        "xs": 12,
+        "sm": 3
+      },
+      {
+        "name": "gender",
+        "type": "select",
+        "label": "Gender",
+        "options": [
+          { "label": "Male", "value": "male" },
+          { "label": "Female", "value": "female" }
+        ],
+        "variant": "outlined",
+        "fullWidth": true,
+        "required": true,
+        "xs": 12,
+        "sm": 3
+      },
+      {
+        "name": "gender",
+        "type": "autoComplete",
+        "label": "Gender",
+        "options": [
+          { "label": "Male", "value": "male" },
+          { "label": "Female", "value": "female" }
+        ],
+        "variant": "outlined",
+        "fullWidth": true,
+        "required": true,
+        "xs": 12,
+        "sm": 3
+      },
+      {
+        "name": "start_date",
+        "type": "date",
+        "label": "Start date",
+        "variant": "outlined",
+        "fullWidth": true,
+        "required": true,
+        "xs": 12,
+        "sm": 3
       }
     ],
-    "tableName": "categories"
+    "tableName": "schools"
   }
 }

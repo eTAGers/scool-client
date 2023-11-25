@@ -57,7 +57,7 @@ export default function Nav({ openNav, onCloseNav }) {
       <Box sx={{ px: 2.5, pt: 3, display: 'flex', justifyContent: 'space-between' }}>
         <Logo />{' '}
         <Link
-          to={`https://etagers-e-com.netlify.app/${getUserDetails().storename}`}
+          to={`https://etagers-e-com.netlify.app/${getUserDetails()?.storename}`}
           component={RouterLink}
           target="_blank"
           sx={{ mt: 4, display: 'contents' }}

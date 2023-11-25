@@ -27,13 +27,13 @@ export function makePayload(sectionName, method, data, operation) {
         })),
         {
           key: 'storeid',
-          value: getUserDetails().storeid,
+          value: getUserDetails()?.storeid,
         },
       ],
     }),
     condition: {
       data: [
-        { key: 'storeid', value: getUserDetails().storeid },
+        { key: 'storeid', value: getUserDetails()?.storeid },
         ...Object.keys(data).reduce((result, key) => {
           if (key.includes('id')) {
             result.push({ key, value: data[key] });

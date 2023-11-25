@@ -1,8 +1,9 @@
-import { Box, Grid, IconButton } from '@mui/material';
+import { Box, Button, Grid, IconButton, Stack, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import PropTypes from 'prop-types';
 import EditIcon from '@mui/icons-material/Edit';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Fields from '../../components/Field';
 import http from '../../utils/http-common';
 import MuiTable from '../../components/table';
@@ -11,6 +12,7 @@ import { useSnackbar } from '../../utils/CommonSnack';
 import GenericDialog from '../../components/Dialog';
 import { IsLoadingHOC } from '../../utils/hoc/loader';
 import fieldData from '../../utils/pages.json';
+import Iconify from '../../components/iconify/Iconify';
 
 function Form({ sectionName, sectionData, setLoading }) {
   const { showSnackbar } = useSnackbar();
@@ -116,8 +118,51 @@ function Form({ sectionName, sectionData, setLoading }) {
   };
   return (
     <div>
-      <h1>{sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}</h1>
-      <GenericDialog
+      {showForm ? (
+        <>
+          <Typography variant="h4" sx={{ mb: 5 }}>
+            <ArrowBackIcon onClick={() => setShowForm(false)} />
+            {isEdit ? 'Update' : 'Add'} {sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}
+          </Typography>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid container spacing={2}>
+              {sectionData.fields.map((field, i) => (
+                <Grid xs={field.xs} sm={field.sm} item key={field.name}>
+                  <Fields
+                    index={i}
+                    value={field.value}
+                    fields={field}
+                    formControl={{
+                      control,
+                      errors,
+                    }}
+                  />
+                </Grid>
+              ))}
+              <Grid xs={12} sm={12} item>
+                <Button variant="contained" type="submit">
+                  {isEdit ? 'Update' : 'Submit'}
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </>
+      ) : (
+        <>
+          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+            <Typography variant="h4" gutterBottom>
+              {sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}{' '}
+            </Typography>
+            <Button variant="contained" onClick={handleAdd} startIcon={<Iconify icon="eva:plus-fill" />}>
+              New {sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}
+            </Button>
+          </Stack>
+          <Grid item xs={12}>
+            <MuiTable columns={col} data={data} actions={actions} />
+          </Grid>
+        </>
+      )}
+      {/* <GenericDialog
         open={showForm}
         title={`${isEdit ? 'Update' : 'Add'} ${sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}`}
         onClose={() => {
@@ -148,7 +193,7 @@ function Form({ sectionName, sectionData, setLoading }) {
       />
       <Grid item xs={12}>
         <MuiTable columns={col} data={data} actions={actions} add handleAdd={handleAdd} />
-      </Grid>
+      </Grid> */}
     </div>
   );
 }

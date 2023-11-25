@@ -5,6 +5,7 @@ import { getUserDetails } from './utils/utility';
 import fieldData from './utils/pages.json';
 import DynamicPage from './pages/DynamicPage';
 import ProductAddPage from './pages/ProductAddPage';
+import Settings from './pages/Settings';
 
 // Layouts
 const DashboardLayout = lazy(() => import('./layouts/dashboard'));
@@ -22,8 +23,8 @@ const Storepage = lazy(() => import('./pages/StorePage'));
 export default function Router() {
   const isloggedIn = 'userDetails' in localStorage ? JSON.parse(localStorage.getItem('userDetails')).token : '';
   let route = [];
-  if (isloggedIn) {
-    if (getUserDetails()?.storename) {
+  if (true) {
+    if (true) {
       route = [
         {
           path: '/dashboard',
@@ -39,6 +40,7 @@ export default function Router() {
               path: sectionName.toLowerCase(),
               element: <DynamicPage sectionName={sectionName} />,
             })),
+            { path: 'settings', element: <Settings /> },
           ],
         },
         {

@@ -99,7 +99,7 @@ function ProductsPage(props) {
 
   const getProducts = () => {
     const payload = {
-      storeId: getUserDetails().storeid,
+      storeId: getUserDetails()?.storeid,
     };
     dispatch(fetchProducts(payload))
       .unwrap()
